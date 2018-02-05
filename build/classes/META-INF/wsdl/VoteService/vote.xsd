@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://xml.netbeans.org/schema/vote"
+            xmlns:tns="http://xml.netbeans.org/schema/vote"
+            elementFormDefault="qualified">
+    
+    <xsd:complexType name="CandidatInfo">
+        <xsd:sequence>
+            <xsd:element name="nom" type="xsd:string"/>
+            <xsd:element name="prenom" type="xsd:string"/>
+            <xsd:element name="affiliation" type="xsd:string"/>
+            <xsd:element name="numeroCandidat" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CitoyenInfo">
+        <xsd:sequence>
+            <xsd:element name="nom" type="xsd:string"/>
+            <xsd:element name="prenom" type="xsd:string"/>
+            <xsd:element name="dateNaissance" type="xsd:date"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ElectionInfo">
+        <xsd:sequence>
+            <xsd:element name="intituleElection" type="xsd:string"/>
+            <xsd:element name="dateElection" type="xsd:date"/>
+            <xsd:element name="nombreInscrits" type="xsd:int" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="VoteVerifInType">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="intituleElection" type="xsd:string"/>
+                <xsd:element name="citoyenInfo" type="tns:CitoyenInfo"/>
+                <xsd:element name="idInscription" type="xsd:string"/>
+                <xsd:element name="date" type="xsd:dateTime"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="VoteVerifOutType">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="citoyenInfo" type="tns:CitoyenInfo"/>
+                <xsd:choice>
+                    <xsd:element name="refus" type="xsd:string"/>
+                    <xsd:sequence>
+                        <xsd:element name="candidatInfo" type="tns:CandidatInfo" minOccurs="1" maxOccurs="unbounded"/>
+                        <xsd:element name="electionInfo" type="tns:ElectionInfo"/>
+                    </xsd:sequence>
+                </xsd:choice>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="VoteVerifFaultType" type="xsd:string"/>
+        
+    <xsd:element name="VoteChoixInType">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="citoyenInfo" type="tns:CitoyenInfo"/>
+                <xsd:element name="idInscription" type="xsd:string"/>
+                <xsd:element name="numeroCandidat" type="xsd:int"/>
+                <xsd:element name="date" type="xsd:dateTime"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="VoteChoixOutType">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="citoyenInfo" type="tns:CitoyenInfo"/>
+                <xsd:element name="validation" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="VoteChoixFaultType" type="xsd:string"/>
+</xsd:schema>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions name="VoteService" 
+             targetNamespace="http://j2ee.netbeans.org/wsdl/VoteService/wsdl/VoteService"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+             xmlns:tns="http://j2ee.netbeans.org/wsdl/VoteService/wsdl/VoteService" 
+             xmlns:ns="http://xml.netbeans.org/schema/vote" 
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" 
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    
+    <types>
+        <xsd:schema targetNamespace="http://j2ee.netbeans.org/wsdl/VoteService/wsdl/VoteService">
+            <xsd:import namespace="http://xml.netbeans.org/schema/vote" schemaLocation="vote.xsd"/>
+        </xsd:schema>
+    </types>
+    
+    <message name="VerifierInscriptionIn">
+        <part name="voteVerifIn" element="ns:VoteVerifInType"/>
+    </message>
+    <message name="VerifierInscriptionOut">
+        <part name="voteVerifOut" element="ns:VoteVerifOutType"/>
+    </message>
+    <message name="VerifierInscriptionFault">
+        <part name="voteVerifFault" element="ns:VoteVerifFaultType"/>
+    </message>
+    <message name="EffectuerVoteIn">
+        <part name="voteChoixIn" element="ns:VoteChoixInType"/>
+    </message>
+    <message name="EffectuerVoteOut">
+        <part name="voteChoixOut" element="ns:VoteChoixOutType"/>
+    </message>
+    <message name="EffectuerVoteFault">
+        <part name="voteChoixFault" element="ns:VoteChoixFaultType"/>
+    </message>
+    
+    <portType name="VoteServicePortType">
+        <operation name="VerifierInscription">
+            <input name="inputVerifierInscription" message="tns:VerifierInscriptionIn"/>
+            <output name="outputVerifierInscription" message="tns:VerifierInscriptionOut"/>
+            <fault name="faultVerifierInscription" message="tns:VerifierInscriptionFault"/>
+        </operation>
+        <operation name="EffectuerVote">
+            <input name="inputEffectuerVote" message="tns:EffectuerVoteIn"/>
+            <output name="outputEffectuerVote" message="tns:EffectuerVoteOut"/>
+            <fault name="faultEffectuerVote" message="tns:EffectuerVoteFault"/>
+        </operation>
+    </portType>
+    
+    <binding name="VoteServiceBinding" type="tns:VoteServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="VerifierInscription">
+            <soap:operation style="document"/>
+            <input name="inputVerifierInscription">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/WS-I_R2717/src/WS-I_R2717violation"/>
+            </input>
+            <output name="outputVerifierInscription">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/WS-I_R2717/src/WS-I_R2717violation"/>
+            </output>
+            <fault name="faultVerifierInscription">
+                <soap:fault name="faultVerifierInscription" use="literal"/>
+            </fault>
+        </operation>
+        <operation name="EffectuerVote">
+            <soap:operation style="document"/>
+            <input name="inputEffectuerVote">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/WS-I_R2717/src/WS-I_R2717violation"/>
+            </input>
+            <output name="outputEffectuerVote">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/WS-I_R2717/src/WS-I_R2717violation"/>
+            </output>
+            <fault name="faultEffectuerVote">
+                <soap:fault name="faultEffectuerVote"/>
+            </fault>
+        </operation>
+    </binding>
+    
+    <service name="VoteService">
+        <port name="VoteServicePort" binding="tns:VoteServiceBinding">
+            <soap:address location="http://localhost:8080/VoteService/VoteWS"/>
+        </port>
+    </service>
+    
+    <plnk:partnerLinkType name="VoteService">
+        <plnk:role name="VoteServicePortTypeRole" portType="tns:VoteServicePortType"/>
+    </plnk:partnerLinkType>
+</definitions>
